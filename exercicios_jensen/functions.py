@@ -15,3 +15,10 @@ def getRmse(X_train,y_train,X_test,y_test,degree):
     rmse_test = np.sqrt(mean_squared_error(y_test,model.predict(X_test)))
     return rmse_train, rmse_test
 
+def eqmByComplexity(X_train,y_train,X_test,y_test,degree):
+    model = Pipeline([
+        ('std_scaler', StandardScaler()),
+        ('poly', PolynomialFeatures(degree)),
+        ('lin_reg', LinearRegression())
+    ])
+    model.fit(X_train,y_train)
