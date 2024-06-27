@@ -38,3 +38,14 @@ def KFold(x,y,k):
                 y = np.delete(y,index)
                 x = np.delete(x,index)
     return x_new,y_new
+
+def SVDinv(A):
+    U,s,VT = np.linalg.svd(A)
+    
+    D = np.zeros((len(U),len(VT)))
+    for i in range(len(VT)):
+        D[i,i] = s[i]
+    UT = np.transpose(U)
+    V = np.transpose(VT)
+    invD = np.linalg.inv(D)
+    return np.matmul(V,np.matmul(invD,UT))
