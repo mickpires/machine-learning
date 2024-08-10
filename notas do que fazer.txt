@@ -1,0 +1,9 @@
+- perceptron
+
+- MLP
+
+- Métodos de otimização: gradiente descendente e estocástico
+
+- backpropagation
+
+- regularização em redes neurais
