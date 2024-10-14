@@ -1,0 +1,152 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{Geron2021}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=d29efc2620ae890d68c6f3b12d569336}{%
+           family={Géron},
+           familyi={G\bibinitperiod},
+           given={Aurélion},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {O'Reilly}%
+      }
+      \strng{namehash}{d29efc2620ae890d68c6f3b12d569336}
+      \strng{fullhash}{d29efc2620ae890d68c6f3b12d569336}
+      \strng{fullhashraw}{d29efc2620ae890d68c6f3b12d569336}
+      \strng{bibnamehash}{d29efc2620ae890d68c6f3b12d569336}
+      \strng{authorbibnamehash}{d29efc2620ae890d68c6f3b12d569336}
+      \strng{authornamehash}{d29efc2620ae890d68c6f3b12d569336}
+      \strng{authorfullhash}{d29efc2620ae890d68c6f3b12d569336}
+      \strng{authorfullhashraw}{d29efc2620ae890d68c6f3b12d569336}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Mãos à Obra: Aprendizado de Máquina co Scikit-learn, Keras \& TensorFlow}
+      \field{year}{2021}
+    \endentry
+    \entry{minsky1969introduction}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=2fe335dc52e059141e41e4fada160d64}{%
+           family={Minsky},
+           familyi={M\bibinitperiod},
+           given={Marvin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=1c2a469ce4211d0d3369b692b74ee471}{%
+           family={Papert},
+           familyi={P\bibinitperiod},
+           given={Seymour},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{b50bea5dca97e316780bd758a3cc428e}
+      \strng{fullhash}{b50bea5dca97e316780bd758a3cc428e}
+      \strng{fullhashraw}{b50bea5dca97e316780bd758a3cc428e}
+      \strng{bibnamehash}{b50bea5dca97e316780bd758a3cc428e}
+      \strng{authorbibnamehash}{b50bea5dca97e316780bd758a3cc428e}
+      \strng{authornamehash}{b50bea5dca97e316780bd758a3cc428e}
+      \strng{authorfullhash}{b50bea5dca97e316780bd758a3cc428e}
+      \strng{authorfullhashraw}{b50bea5dca97e316780bd758a3cc428e}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Cambridge tiass., HIT}
+      \field{number}{480}
+      \field{title}{An introduction to computational geometry}
+      \field{volume}{479}
+      \field{year}{1969}
+      \field{pages}{104}
+      \range{pages}{1}
+    \endentry
+    \entry{alexander2020}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=221308f6d2a2173f8faf619a95ccde6b}{%
+           family={Alexander},
+           familyi={A\bibinitperiod},
+           given={Doug},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nova Science Publishers, Incorporated}%
+      }
+      \strng{namehash}{221308f6d2a2173f8faf619a95ccde6b}
+      \strng{fullhash}{221308f6d2a2173f8faf619a95ccde6b}
+      \strng{fullhashraw}{221308f6d2a2173f8faf619a95ccde6b}
+      \strng{bibnamehash}{221308f6d2a2173f8faf619a95ccde6b}
+      \strng{authorbibnamehash}{221308f6d2a2173f8faf619a95ccde6b}
+      \strng{authornamehash}{221308f6d2a2173f8faf619a95ccde6b}
+      \strng{authorfullhash}{221308f6d2a2173f8faf619a95ccde6b}
+      \strng{authorfullhashraw}{221308f6d2a2173f8faf619a95ccde6b}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Neural Networks: History and Applications}
+      \field{year}{2020}
+    \endentry
+    \entry{Bourilkov_2019}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=77573c73167d5e6ea3f13d4692ac7480}{%
+           family={Bourilkov},
+           familyi={B\bibinitperiod},
+           given={Dimitri},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {World Scientific Pub Co Pte Lt}%
+      }
+      \strng{namehash}{77573c73167d5e6ea3f13d4692ac7480}
+      \strng{fullhash}{77573c73167d5e6ea3f13d4692ac7480}
+      \strng{fullhashraw}{77573c73167d5e6ea3f13d4692ac7480}
+      \strng{bibnamehash}{77573c73167d5e6ea3f13d4692ac7480}
+      \strng{authorbibnamehash}{77573c73167d5e6ea3f13d4692ac7480}
+      \strng{authornamehash}{77573c73167d5e6ea3f13d4692ac7480}
+      \strng{authorfullhash}{77573c73167d5e6ea3f13d4692ac7480}
+      \strng{authorfullhashraw}{77573c73167d5e6ea3f13d4692ac7480}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1793-656X}
+      \field{journaltitle}{International Journal of Modern Physics A}
+      \field{month}{12}
+      \field{number}{35}
+      \field{title}{Machine and deep learning applications in particle physics}
+      \field{volume}{34}
+      \field{year}{2019}
+      \field{pages}{1930019}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1142/s0217751x19300199
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1142/S0217751X19300199
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1142/S0217751X19300199
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

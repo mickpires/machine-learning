@@ -1,0 +1,5 @@
+Todos os arquivos de texto estão na codificação UTF-8 sem BOM e com quebras de linha em Unix. O Bloco de Notas do Windows 7 ou abaixo é incompatível. Para gerar o documento PDF, pode-se usar uma distribuição TeX como o TeX Live ou o MiKTeX. Ao gerar o documento no TeXworks, executar: pdflatex, bibtex, pdflatex, pdflatex.
+
+Comandos únicos:
+	MiKTeX: texify -p texto.tex
+	TeX Live: latexmk -pdf texto.tex

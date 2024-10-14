@@ -1,0 +1,118 @@
+\documentclass[11pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[portuguese]{babel}
+\usetheme{CambridgeUS}
+\usepackage[backend=biber, style=numeric,sorting=none]{biblatex}
+\bibliography{/home/mickael/faculdade/tcc/projeto_tcc/bibliography.bib} % Certifique-se de adicionar suas referências
+\begin{document}
+	\author{Mickael Pires}
+	\title{Projeto de TCC}
+	%\subtitle{}
+	%\logo{}
+	%\institute{}
+	%\date{}
+	%\subject{}
+	%\setbeamercovered{transparent}
+	%\setbeamertemplate{navigation symbols}{}
+	
+	\frame{\titlepage}
+	
+	\section{Introdução}
+	\begin{frame}{Introdução}
+		\begin{itemize}
+			\item Redes Neurais surgiram na década de 1940 \cite{Geron2021}.
+			\item Década de 1960: Limitações do Perceptron \cite{minsky1969introduction}.
+			\item Década de 1980: Renascimento das Redes Neurais \cite{alexander2020}.
+			\item Modelos básicos:
+			\begin{itemize}
+				\item \textit{Perceptron};
+				\item \textit{Multilayer Perceptron}.
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	\section{Modelos de Redes Neurais}
+	\begin{frame}{Perceptron}
+		\begin{itemize}
+			\item Primeiro modelo de rede neural desenvolvido nos anos 1950.
+			\item Estrutura simples de uma camada com neurônios de saída binária.
+			\item Exemplo de cálculo:
+			\begin{equation}
+				a_j = \sum_i w_{ji} x_i + w_{j0}
+			\end{equation}
+			\item Função de ativação:
+			\begin{equation}
+				y = h(a_j)
+			\end{equation}
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{Multilayer Perceptron (MLP)}
+		\begin{itemize}
+			\item Introdução de camadas ocultas.
+			\item Modelo \textit{feedforward}, sinal flui da entrada para a saída.
+			\item Exemplo de cálculo para cada camada:
+			\begin{equation}
+				a_j = \sum_i w_{ji} z_i + w_{j0}, \quad z_i = h(a_i)
+			\end{equation}
+		\end{itemize}
+	\end{frame}
+	
+	\section{Objetivos}
+	\begin{frame}{Objetivo Geral}
+		Estudar redes neurais artificiais, com enfoque em \textit{Feed-Forward Neural Network} e aplicar em problemas de classificação.
+	\end{frame}
+	
+	\begin{frame}{Objetivos Específicos}
+		\begin{itemize}
+			\item Explorar as redes neurais;
+			\item Estudar métodos de otimização;
+			\item Investigar regularização em redes neurais.
+		\end{itemize}
+	\end{frame}
+	
+	\section{Justificativa}
+	\begin{frame}{Justificativa}
+		\begin{itemize}
+			\item Redes neurais são amplamente utilizadas em reconhecimento de padrões.
+			\item Aplicações em Física de Partículas e Altas Energias \cite{Bourilkov_2019}.
+			\item Intenção futura de aplicar em:
+			\begin{itemize}
+				\item Classificação e seleção de eventos;
+				\item Reconstrução e simulação de dados;
+				\item Identificação de partículas.
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	\section{Metodologia}
+	\begin{frame}{Metodologia}
+		\begin{itemize}
+			\item Apresentação teórica do Perceptron e \textit{Feed-Forward Neural Network}.
+			\item Discussão de métodos de otimização:
+			\begin{itemize}
+				\item Newton-Raphson;
+				\item Gradiente Descendente;
+				\item Gradiente Estocástico com \textit{Mini-batch}.
+			\end{itemize}
+			\item Regularização: \textit{Early Stopping}, invariâncias, priores de processos gaussianos.
+			\item Implementação usando Keras e TensorFlow.
+		\end{itemize}
+	\end{frame}
+	
+	\section{Cronograma}
+	\begin{frame}{Cronograma}
+		\begin{itemize}
+			\item Setembro a Novembro: Escrita da parte teórica.
+			\item Novembro a Dezembro: Implementação e finalização.
+		\end{itemize}
+	\end{frame}
+	
+	\section{Referências}
+	\begin{frame}[allowframebreaks]{Referências}
+		\printbibliography
+	\end{frame}
+	
+\end{document}

@@ -1,0 +1,182 @@
+\documentclass[12pt,titlepage]{article}
+\usepackage[brazilian]{babel}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{physics}
+\usepackage{csquotes}
+\usepackage{dialogue}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{heuristica}
+\usepackage[heuristica,vvarbb,bigdelims]{newtxmath}
+\usepackage[T1]{fontenc}
+\usepackage{verbatim}
+\usepackage[backend=biber, style=authoryear,sorting=none]{biblatex}
+\bibliography{bibliography.bib}
+\renewcommand*\oldstylenums[1]{\textosf{#1}}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm,}
+
+%opening
+\title{}
+\author{Mickael Pires de Pinho}
+
+\begin{document}
+\section{Perceptron}
+
+Perceptron é o modelo de rede neural mais simples em que só há uma unidade/neurônio. Não há uma camada oculta. Então, ele recebe os inputs da camada de entrada com os seus devidos pesos, faz uma média ponderada, executa uma função de ativação, como degrau ou sinal e o resultado disso é a saída. O neurônio utilizado é chamado de unidade lógica de limiar (TLU) \cite{Geron2021}.
+
+O cálculo é bem simples. É utilizado a média ponderada das entradas, junto com os seus pesos \cite{bonaccorso2018mastering}
+\begin{equation}
+a_j = \sum_i w_{ji} x_i
+\end{equation}
+
+onde $x_i$ representar o i-ésimo dado de entrada e $w_{ji}$ é o respectivo peso da conexão daquele dado de entrada com a j-ésima unidade.
+
+Depois é aplicado uma função de ativação, $h(\cdot)$, em $a_j$,
+
+\begin{equation}
+	y = h(a_j),
+\end{equation}
+e $y$ é o dado de saída.
+\section{Multilayer perceptron - MLP}
+
+É o mesmo modelo porém agora com mais camadas, chamadas de hidden layers. Cada unidade tem uma função de ativação que recebe os inputs da camada anterior até chegar a camada de saída. O sinal circula apenas em uma direção (das entradas às saídas). A arquitetura de MLP é o exemplo de um rede neural \textit{feedforward}\cite{Geron2021}.
+
+Uma rede neural calcula a média ponderada das entradas da seguinte forma 
+
+\begin{equation}
+	\label{eq: media ponderada dos pesos ffnn}
+	a_j = \sum_i w_{ji} z_i
+\end{equation}
+
+onde $$z_i = h(a_i)$$ é a transformação de $a_i$ pela função de ativação $h(\cdot)$.
+
+\section{Métodos de otimização: gradiente descendente e estocástico}
+
+\subsection{gradiente descendente}
+
+O método gradiente descendente é um método de otimização. É basicamente o método de Newton-Raphson. É dado por 
+
+\begin{equation}
+	\theta^{(\tau +1)} = \theta^{(\tau)} - \mathcal H^{(\tau)^{-1}} \nabla C(\theta^{(\tau)}).
+\end{equation}
+onde
+
+\begin{itemize}
+	\item $\theta$ é o parâmetro a ser otimizado;
+	\item $\mathcal H^{-1}$ é o inverso da hessiana;
+	\item $\nabla C(\theta)$ é o gradiente da função de custo;
+\end{itemize}
+Porém calcular a matriz hessiana é muito cara computacionalmente. Então, é aconselhável substituir por $\eta$ que é chamado de taxa de aprendizado. $\eta$ tem de ser menor do que o maior autovalor de $\mathcal H^{-1}$.
+
+$$ \eta = \frac{1}{\lambda_\text{max}}$$
+
+Logo, a expressão fica 
+
+\begin{equation}
+	\theta^{(\tau +1)} = \theta^{(\tau)} - \eta \nabla C(\theta^{(\tau)})
+\end{equation}
+
+Este método usa todo o conjunto de dados para o treinamento.
+
+\subsection{Gradiente descendente estocástico}
+
+O método de gradiente descendente estocástico utiliza uma parcela de dados em cada época para otimizar o parâmetro $\theta$.
+
+A ideia por trás do gradiente descendente estocástico é que a função de custo pode ser escrita como
+
+\begin{equation}
+	\label{eq: eq. de custo como somatório}
+	C(\theta) = \sum_{i=1}^n c_i(x_i,\theta).
+\end{equation}
+
+$c_i$ é o valor da função de custo naquele conjunto de dado $x_i$. $c_i$ também é chamado de função de perda e a sua soma é a função de custo $C(\theta)$ \cite{bonaccorso2018mastering}. O gradiente pode ser calculado como
+
+\begin{equation}
+	\nabla C(\theta) = \sum_{i=1}^n \nabla c_i(x_i,\theta).
+\end{equation}
+
+A estocasticidade é introduzida porque os $x_i$ são escolhidos aleatoriamente do conjunto de dados para treinar $\theta$. Este subconjunto formado por $x_i$ é chamado de minibatch. A quantidade de minibatches é um hiperparâmetro. O algoritmo vai otimizar $\theta$ iterando por esses minibatches. Como ilustrado na equação \ref{eq: calculo dos minibatches}
+
+\begin{equation}
+	\label{eq: calculo dos minibatches}
+	\theta^{\tau+1} = \theta^\tau - \eta \sum_{x_i \in B_k} \nabla c_i(x_i,\theta),
+\end{equation}
+
+onde $B_k$ é o $k$-ésimo minibatch. Um outro hiperparâmetro é epochs que é a quantidade de vezes em que vai se repetir o processo de formar os minibatches e calcular $\theta$ \cite{Morten2021}.
+
+Uma ilustração do algoritmo seria:
+\begin{itemize}
+	\item escolha uma quantidade de minibatches. Por exemplo, 32 minibatches. É preferível que a quantidade de minibatches seja potências de 2 por razões de otimização computacional \cite{Morten2021};
+	\item escolha aleatoriamente $n/M$ dados para cada minibatch;
+	\item itere pelos minibatches calculando a equação \eqref{eq: calculo dos minibatches};
+	\item repita o ciclo até percorrer o número de epochs escolhido;
+\end{itemize}
+
+\section{Backpropagation}
+
+\textit{Backpropagation} é um algoritmo para avaliar o gradiente da função de custo, $C(w)$, para uma \textit{feedforward neural network}. A avaliação da função de custo é realizada por meio de esquema de passar mensagens ao qual informação é passada progressivamente e retroativamente pela rede neural \cite{bishop2006}.
+
+Queremos saber como que a função de custo varia com os pesos. Utilizando a função de perda. É fácil ver que a função de perda varia da seguinte forma
+
+\begin{equation}
+	\pdv{c_n}{w_{ji}} = \pdv{c_n}{a_j} \pdv{a_j}{w_{ji}}
+\end{equation}
+
+onde 
+
+\begin{equation}
+	a_j = \sum_i w_{ji} z_i.
+\end{equation}
+Logo, temos duas relações:
+
+\begin{align}
+	\pdv{c_n}{a_j} &= \delta_j,\\
+	\pdv{a_j}{w_{ji}} &= z_i
+\end{align}
+
+onde $\delta_j$ vai ser chamado de j-ésimo erro. A função de perda vai variar com os pesos da seguinte forma
+
+\begin{equation}
+	\pdv{c_n}{w_{ji}} = \delta_j z_i.
+\end{equation}
+
+Para avaliarmos os $\delta$ para a camada oculta, nós utilizamos novamente a regra da cadeia
+
+\begin{equation}
+	\label{eq: calculo de erro para camadas ocultas}
+	\delta_j = \pdv{c_n}{a_j} = \sum_k \pdv{c_n}{a_k}\pdv{a_k}{a_j}
+\end{equation}
+
+onde \begin{equation}
+	\delta_k = \pdv{c_n}{a_k}.
+\end{equation}
+
+Para avaliarmos $\pdv{a_k}{a_j}$, usamos a eq. \eqref{eq: media ponderada dos pesos ffnn} e obtemos
+
+\begin{align}
+	\pdv{a_k}{a_j} &= \pdv{z_j}{a_j}\pdv{a_k}{z_j},\\
+	\pdv{a_k}{a_j} &= h'(a_j) w_{kj}.
+\end{align}
+
+Logo, a eq \eqref{eq: calculo de erro para camadas ocultas} fica \cite{bishop2006}
+
+\begin{equation}
+	\label{eq: formula backpropagation}
+	\delta_j = h'(a_j) \sum_k w_{kj}\delta_k.
+\end{equation}
+
+\section{Regularização em Redes Neurais}
+
+Regularização da rede neural são práticas para evitar com que a rede faça \textit{overfitting}. Então, a discussão da práticas de regularização de redes neurais gira em torno da arquitetura da rede já que as unidades de entrada e de saída são determinadas pela dimensionalidade do conjunto de dados. O que resta para otimizar é a arquitetura como, por exemplo, o número de camadas ocultas $M$ ou como otimizar a função de custo usando Ridge (norma $\ell^2$) ou Lasso (norma $\ell^1$)  \cite{bishop2006}.
+
+\newpage
+\printbibliography
+\end{document}
