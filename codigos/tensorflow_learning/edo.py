@@ -1,6 +1,10 @@
 from tensorflow import keras
 import tensorflow as tf
 import numpy as np
+import logging
+
+logging.basicConfig(filename='app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
+
 
 class EDOModel(keras.Model):
     def __init__(self,denses= 100,activations='sigmoid',hiddens = 1,**kwargs):
@@ -27,7 +31,7 @@ class EDOModel(keras.Model):
     
 
     def compute_loss(self, predictions, inputs, dydx):
-        return tf.reduce_sum(tf.square(predictions + inputs * dydx - 1 - inputs * predictions))
+        return tf.reduce_mean(tf.square(dydx - inputs))
     
     def train_step(self,data):
         inputs, targets = data
@@ -36,6 +40,7 @@ class EDOModel(keras.Model):
                 tape2.watch(inputs)
                 predictions = self(inputs,training=True)
             dydx =tape2.gradient(predictions,inputs)
+            logging.info(dydx)
             loss= self.compute_loss(predictions,inputs,dydx)
         gradients = tape.gradient(loss,self.trainable_variables)
         self.optimizer.apply_gradients(zip(gradients,self.trainable_variables))
