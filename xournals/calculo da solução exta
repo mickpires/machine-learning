@@ -1,0 +1,13 @@
+Nós podemos aprender muito sobre o método de gradiente descendente considerando o caso ideal, ao qual a função é quadrática, logo convexa, e então a busca linear é exata. Vamos supor
+
+\begin{equation}
+f(x) = \frac{1}{2}\mathbf X^T\mathbf Q \mathbf X - \mathbf b^T \mathbf X
+\end{equation}
+
+onde $\mathbf Q$ é simétrico e definido positivamente. Tomando a primeira derivada de $f(x)$:
+
+\begin{equation}
+\label{eq: derivada de f}
+    \dv{f(x)}{\mathbf X^T} = \mathbf Q \mathbf X - \mathbf{b}^T= 0. 
+\end{equation}
+Logo, $\mathbf X^*$ representa a solução única que satisfaz o sistema linear da eq. \eqref{eq: derivada de f}.
