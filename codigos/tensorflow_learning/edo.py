@@ -18,21 +18,16 @@ class EDOModel(keras.Model):
         self.output_layer = keras.layers.Dense(1)
     
     def call(self,inputs):
-        a = inputs
+        z = inputs
 
         for layer_name, layer in self.hiddens.items():
-            a = layer(a)
-        output = self.output_layer(a)
+            z = layer(z)
+        output = self.output_layer(z)
         return output
     
 
     def compute_loss(self, predictions, inputs, dndx):
-        loss_edo = tf.reduce_mean((dndx - inputs)**2)
-        y0 = self(tf.constant([[0.0]]))
-        loss_ci = (y0 - 0) ** 2
-        return loss_edo + loss_ci
-    
-        #return tf.reduce_mean(tf.square(predictions + inputs*dndx - inputs))
+        return tf.reduce_mean(tf.square(predictions + inputs*dndx - inputs))
     
 
     # def train_step(self,data):
@@ -58,12 +53,11 @@ class EDOModel(keras.Model):
     def train_step(self,data):
         inputs, _ = data
         with tf.GradientTape() as tape:
-            with tf.GradientTape() as tape2:
+            with tf.GradientTape as tape2:
                 tape2.watch(inputs)
-                predictions = self(inputs,training=True)
-            dndx = tape2.gradient(predictions,inputs) 
-            loss= self.compute_loss(predictions,inputs,dndx)
-        gradients = tape.gradient(loss,self.trainable_variables)
-        self.optimizer.apply_gradients(zip(gradients,self.trainable_variables))
-
+                outputs = self(inputs,training=True)
+            dndx = tape2.gradient(outputs,inputs)
+            loss = self.compute_loss(outputs,inputs,dndx)
+        dldw = tape.gradient(loss,self.trainable.weights)
+        self.apply_gradients()
         return {"loss":loss}
