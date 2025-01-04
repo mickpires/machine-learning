@@ -26,8 +26,8 @@ class EDOModel(keras.Model):
         return output
     
 
-    def compute_loss(self, predictions, inputs, dndx):
-        return tf.reduce_mean(tf.square(predictions + inputs*dndx - inputs))
+    def compute_loss(self, n, x, dndx):
+        return tf.reduce_mean(tf.square(n + x*dndx + (x+(1+3*x**2)/(1+x+x**3))*(1 + x*dndx) -(x**3 + 2*x+x**2*(1+3*x**2)/(1+x+x**3))))
     
 
     # def train_step(self,data):
@@ -53,11 +53,11 @@ class EDOModel(keras.Model):
     def train_step(self,data):
         inputs, _ = data
         with tf.GradientTape() as tape:
-            with tf.GradientTape as tape2:
+            with tf.GradientTape() as tape2:
                 tape2.watch(inputs)
                 outputs = self(inputs,training=True)
             dndx = tape2.gradient(outputs,inputs)
             loss = self.compute_loss(outputs,inputs,dndx)
-        dldw = tape.gradient(loss,self.trainable.weights)
-        self.apply_gradients()
+        dldw = tape.gradient(loss,self.trainable_weights)
+        self.optimizer.apply_gradients(zip(dldw,self.trainable_variables))
         return {"loss":loss}
