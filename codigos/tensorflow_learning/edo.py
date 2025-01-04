@@ -5,13 +5,12 @@ import numpy as np
 class EDOModel(keras.Model):
     def __init__(self,denses= 100,activations='sigmoid',**kwargs):
         super().__init__(**kwargs)
-        self.hidden_layer = 
+        self.hidden_layer = keras.layers.Dense(denses,activation=activations)
+        self.output_layer = keras.layers.Dense(1)
     
     def call(self,inputs):
         z = inputs
-
-        for layer_name, layer in self.hiddens.items():
-            z = layer(z)
+        z = self.hidden_layer(z)
         output = self.output_layer(z)
         return output
     
@@ -40,14 +39,6 @@ class EDOModel(keras.Model):
 
     #     return{"loss": loss}
 
-    def train_step(self,data):
+    def train_step(self,data): # aqui fazer que nem está no artigo
         inputs, _ = data
-        with tf.GradientTape() as tape:
-            with tf.GradientTape() as tape2:
-                tape2.watch(inputs)
-                outputs = self(inputs,training=True)
-            dndx = tape2.gradient(outputs,inputs)
-            loss = self.compute_loss(outputs,inputs,dndx)
-        dldw = tape.gradient(loss,self.trainable_weights)
-        self.optimizer.apply_gradients(zip(dldw,self.trainable_variables))
-        return {"loss":loss}
+        
