@@ -46,4 +46,5 @@ class EDOModel(keras.Model):
             outputs = self(inputs,training=True)
             dndx = tape.gradient(outputs,dndx)
             loss = self.compute_loss(outputs,inputs,dndx)
-            
+        gradients = tape.gradient(dndx,self.trainable_weights)
+        self.apply_gradients
