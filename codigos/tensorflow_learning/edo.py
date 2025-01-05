@@ -41,4 +41,9 @@ class EDOModel(keras.Model):
 
     def train_step(self,data): # aqui fazer que nem está no artigo
         inputs, _ = data
-        
+        with tf.GradientTape(persistent=True) as tape:
+            tape.watch(inputs)
+            outputs = self(inputs,training=True)
+            dndx = tape.gradient(outputs,dndx)
+            loss = self.compute_loss(outputs,inputs,dndx)
+            
