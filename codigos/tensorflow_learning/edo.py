@@ -12,6 +12,7 @@ class EDOModel(keras.Model):
         z = inputs
         z = self.hidden_layer(z)
         output = self.output_layer(z)
+        boundary_value = tf.constant(0.,dtype='float64',shape=output.get_shape())
         return output
     
 
@@ -20,7 +21,7 @@ class EDOModel(keras.Model):
             tape.watch(x)
             n = self(x)
         dndx = tape.gradient(n,x)
-        return tf.square(n + x*dndx + (x+(1+3*x**2)/(1+x+x**3))*(1 + x*dndx) -(x**3 + 2*x+x**2*(1+3*x**2)/(1+x+x**3)))
+        return tf.square(dndx + tf.multiply(x + (1 +3*x**2)/(1+x+x**3),n)-x**3 + 2*x - x**2*(1+3*x**2)/(1+x+x**3))
     
 
     # def train_step(self,data):
