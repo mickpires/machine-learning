@@ -2,22 +2,20 @@ from tensorflow import keras
 import tensorflow as tf
 import numpy as np
 
-def boundary(inputs):
-    inputs = tf.cast(inputs, dtype=tf.float64)
-    return tf.where(inputs == 0,tf.cast(tf.constant(0.),dtype=tf.float64),inputs)
 
 
 class EDOModel(keras.Model):
     def __init__(self,denses= 100,activations='sigmoid',**kwargs):
         super().__init__(**kwargs)
         self.hidden_layer = keras.layers.Dense(denses,activation=activations,dtype='float64')
-        self.output_layer = keras.layers.Dense(1,activation=boundary,dtype='float64')
+        self.output_layer = keras.layers.Dense(1,dtype='float64')
 
     def call(self,inputs):
         inputs = tf.convert_to_tensor(inputs,dtype='float64')
         z = inputs
         z = self.hidden_layer(z)
         output = self.output_layer(z)
+        output = tf.where(inputs == 0,tf.cast(tf.constant(0.),dtype=tf.float64),output)
         return output
     
 
