@@ -45,7 +45,7 @@ def dividir_dados(dados):
     x_test= strat_test_set['comprimento de onda'].values.reshape(-1,1)
     y_test = encoder.fit_transform(strat_test_set['cor'].values.reshape((-1,1))).toarray()
 
-    return x_train,y_train,x_test,y_test
+    return x_train,y_train,x_test,y_test, strat_train_set,strat_test_set
 
 def criar_MLP(x_train,dados,learning_rate = 1.):
     # Cria a camada de normalização
@@ -55,9 +55,8 @@ def criar_MLP(x_train,dados,learning_rate = 1.):
     normalization_layer.adapt(dados['comprimento de onda'].values.reshape(-1, 1))
     input = keras.layers.Input(shape=x_train.shape[1:])
     normalized_input = normalization_layer(input)
-    hidden1 = keras.layers.Dense(100,activation='tanh')(normalized_input)
-    hidden2 = keras.layers.Dense(50,activation='tanh')(hidden1)
-    outputs = keras.layers.Dense(2,activation='softmax')(hidden2)
+    hidden1 = keras.layers.Dense(300,activation='tanh')(normalized_input)
+    outputs = keras.layers.Dense(2,activation='softmax')(hidden1)
 
     MLP = keras.models.Model(inputs=[input],outputs=[outputs])
     MLP.compile(loss='categorical_crossentropy',metrics=['accuracy'],optimizer=keras.optimizers.SGD(learning_rate=learning_rate))
