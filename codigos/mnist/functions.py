@@ -47,7 +47,7 @@ def dividir_dados(dados):
 
     return x_train,y_train,x_test,y_test
 
-def criar_MLP(x_train,dados,learning_rate):
+def criar_MLP(x_train,dados,learning_rate = 1.):
     # Cria a camada de normalização
     normalization_layer = keras.layers.Normalization(axis=-1)
 
@@ -63,3 +63,14 @@ def criar_MLP(x_train,dados,learning_rate):
     MLP.compile(loss='categorical_crossentropy',metrics=['accuracy'],optimizer=keras.optimizers.SGD(learning_rate=learning_rate))
     return MLP
 
+def criar_Perceptron(x_train,dados,learning_rate = 1.):
+    normalization_layer = keras.layers.Normalization(axis=-1)
+    normalization_layer.adapt(dados['comprimento de onda'].values.reshape(-1,1))
+    input = keras.layers.Input(shape=x_train.shape[1:])
+    normalized_input = normalization_layer(input)
+    outputs = keras.layers.Dense(2,activation='softmax')(normalized_input)
+
+    perceptron = keras.models.Model(inputs=[input],outputs=[outputs])
+    perceptron.compile(loss='categorical_crossentropy',metrics=['accuracy'],optimizer=keras.optimizers.SGD(learning_rate=learning_rate))
+
+    return perceptron

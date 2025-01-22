@@ -26,5 +26,5 @@ match num:
         data['comprimento de onda'] += np.random.exponential(3,len(data['comprimento de onda']))
         data.to_csv("dados/dados_imperfeito_exponencial.csv")
     case 4: 
-        data['comprimento de onda'] += np.random.poisson(10,len(data['comprimento de onda']))
+        data['comprimento de onda'] += np.random.poisson(5,len(data['comprimento de onda']))
         data.to_csv("dados/dados_imperfeito_poisson.csv")
