@@ -47,7 +47,7 @@ def dividir_dados(dados):
 
     return x_train,y_train,x_test,y_test, strat_train_set,strat_test_set
 
-def criar_MLP(x_train,dados,learning_rate = 1.):
+def criar_MLP(x_train,dados,learning_rate = 1.,activaction = 'tanh'):
     # Cria a camada de normalização
     normalization_layer = keras.layers.Normalization(axis=-1)
 
@@ -55,7 +55,7 @@ def criar_MLP(x_train,dados,learning_rate = 1.):
     normalization_layer.adapt(dados['comprimento de onda'].values.reshape(-1, 1))
     input = keras.layers.Input(shape=x_train.shape[1:])
     normalized_input = normalization_layer(input)
-    hidden1 = keras.layers.Dense(300,activation='tanh')(normalized_input)
+    hidden1 = keras.layers.Dense(300,activation=activaction)(normalized_input)
     outputs = keras.layers.Dense(2,activation='softmax')(hidden1)
 
     MLP = keras.models.Model(inputs=[input],outputs=[outputs])

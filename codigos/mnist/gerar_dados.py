@@ -11,7 +11,7 @@ for detect in detection:
         color.append('verde')
 
 data = pd.DataFrame({'comprimento de onda':detection,'cor':color})
-num = 2
+num = 4
 
 match num:
     case 0:
@@ -30,6 +30,6 @@ match num:
         data.to_csv("dados/dados_imperfeito_exponencial.csv")
         print(num)
     case 4: 
-        data['comprimento de onda'] += np.random.poisson(5,len(data['comprimento de onda']))
+        data['comprimento de onda'] += np.random.poisson(0,len(data['comprimento de onda']))
         data.to_csv("dados/dados_imperfeito_poisson.csv")
         print(num)
